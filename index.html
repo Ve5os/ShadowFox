@@ -2,10 +2,12 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShadowFox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>SF · коллекция</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600&display=swap" rel="stylesheet">
     <style>
-        /* ——— Сброс и общие стили ——— */
         * {
             margin: 0;
             padding: 0;
@@ -13,365 +15,311 @@
         }
 
         body {
-            background-color: #0a0a0a;
+            background: #0d0a0a;
+            background-image: radial-gradient(circle at 10% 20%, #1f1212 0%, #0a0707 90%);
             min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
-            padding: 20px;
-            margin: 0;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            padding: 16px;
+            color: #e6dcdc;
         }
 
-        /* ——— Основная карточка с оранжевой обводкой ——— */
-        .shadowfox-card {
-            background: #5b5d57;
-            border-radius: 56px;
-            padding: 50px 60px 60px 60px;
-            max-width: 820px;
+        .app {
+            max-width: 420px;
             width: 100%;
-            border: 3px solid #ff8c00;
-            box-shadow: 
-                0 0 40px rgba(255, 140, 0, 0.15),
-                0 0 80px rgba(255, 140, 0, 0.05),
-                inset 0 0 80px rgba(255, 140, 0, 0.02);
+            background: rgba(20, 12, 12, 0.65);
             backdrop-filter: blur(2px);
-            transition: all 0.4s ease;
-            text-align: center;
+            -webkit-backdrop-filter: blur(2px);
+            border: 1px solid #631f1f;
+            border-radius: 36px 36px 28px 28px;
+            padding: 24px 18px 32px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 1px #3f1818 inset;
         }
 
-        .shadowfox-card:hover {
-            box-shadow: 
-                0 0 60px rgba(255, 140, 0, 0.25),
-                0 0 120px rgba(255, 140, 0, 0.08);
-            border-color: #ffa040;
-        }
-
-        /* ——— Время и дата ——— */
-        .time-display {
-            font-size: 5.5rem;
-            font-weight: 300;
-            letter-spacing: 6px;
-            color: #ff8c00;
-            text-shadow: 
-                0 0 10px rgba(255, 140, 0, 0.2),
-                0 0 20px rgba(255, 140, 0, 0.15),
-                0 0 40px rgba(255, 140, 0, 0.1);
-            font-variant-numeric: tabular-nums;
-            line-height: 1.1;
-            margin-bottom: 12px;
-            font-family: 'Inter', 'Segoe UI', monospace;
-        }
-
-        .date-display {
-            font-size: 1.3rem;
-            font-weight: 300;
-            color: #d97d00;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            opacity: 0.8;
-            margin-bottom: 32px;
-            border-bottom: 1px dashed #4a4c46;
-            padding-bottom: 20px;
-            text-shadow: 0 0 8px rgba(217, 125, 0, 0.15);
-        }
-
-        /* ——— Блок возраста ——— */
-        .age-block {
+        .header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: baseline;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 18px;
+            border-bottom: 1px solid #712a2a;
+            padding-bottom: 14px;
+            margin-bottom: 22px;
+            letter-spacing: 0.3px;
         }
 
-        .age-number {
-            font-size: 4.2rem;
+        .header h1 {
+            font-weight: 300;
+            font-size: 1.7rem;
+            text-transform: lowercase;
+            color: #dbb8b8;
+            letter-spacing: 2px;
+        }
+        .header h1 span {
             font-weight: 600;
-            color: #ff9f33;
-            text-shadow: 
-                0 0 10px rgba(255, 159, 51, 0.2),
-                0 0 30px rgba(255, 140, 0, 0.15);
-            line-height: 1;
+            color: #c44f4f;
         }
 
-        .age-label {
-            font-size: 1.5rem;
-            font-weight: 200;
-            color: #e08a2b;
-            letter-spacing: 4px;
-            text-shadow: 0 0 8px rgba(224, 138, 43, 0.15);
+        .header .badge {
+            background: #2f1414;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 400;
+            border: 1px solid #772b2b;
+            color: #cb9c9c;
+            white-space: nowrap;
         }
 
-        /* ——— Таймер до ДР ——— */
-        .countdown-wrapper {
-            background: #4a4c46;
-            border-radius: 100px;
-            padding: 18px 28px;
-            margin: 28px 0 32px 0;
-            border: 1px solid #3d3f3a;
-            display: inline-block;
-            box-shadow: inset 0 4px 12px rgba(0,0,0,0.4);
-        }
-
-        .countdown-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: #b36b1a;
-            margin-bottom: 6px;
-            font-weight: 300;
-            text-shadow: 0 0 6px rgba(179, 107, 26, 0.15);
-        }
-
-        .countdown-timer {
-            font-size: 3.2rem;
-            font-weight: 300;
-            color: #ffa040;
-            text-shadow: 
-                0 0 10px rgba(255, 160, 64, 0.2),
-                0 0 30px rgba(255, 140, 0, 0.15);
-            letter-spacing: 3px;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .countdown-timer span {
-            display: inline-block;
-            min-width: 60px;
-        }
-
-        /* ——— GIF-контейнер (уменьшенный) ——— */
-        .fox-gif-wrapper {
-            margin: 25px auto 0 auto;
+        .stats {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #8a6a6a;
+            letter-spacing: 0.5px;
+            padding: 4px 4px 12px 4px;
+            border-bottom: 1px solid #2a1515;
+            margin-bottom: 16px;
+        }
+        .stats span {
+            color: #c49494;
+        }
+
+        .grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 16px 0 24px;
+        }
+
+        .achievement {
+            display: flex;
             align-items: center;
-            width: 100%;
+            gap: 12px;
+            background: rgba(30, 16, 16, 0.5);
+            border-left: 3px solid #822b2b;
+            padding: 10px 12px;
+            border-radius: 14px;
+            transition: 0.2s;
+            backdrop-filter: blur(2px);
+            border-bottom: 1px solid #341919;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
         }
 
-        #foxGif {
-            display: block;
-            width: 200px;
-            height: 150px;
-            border-radius: 18px;
-            background: #5b5d57;
-            image-rendering: auto;
-            object-fit: cover;
-            transition: all 0.4s ease;
+        .achievement .number {
+            font-size: 0.6rem;
+            font-weight: 300;
+            color: #6a4a4a;
+            min-width: 24px;
+            text-align: center;
+            letter-spacing: 0.5px;
         }
 
-        /* ——— Адаптив ——— */
-        @media (max-width: 600px) {
-            .shadowfox-card {
-                padding: 30px 20px 40px 20px;
-                border-radius: 36px;
-                border-width: 2.5px;
-            }
-            .time-display {
-                font-size: 3.6rem;
-                letter-spacing: 3px;
-            }
-            .date-display {
-                font-size: 1rem;
-            }
-            .age-number {
-                font-size: 3rem;
-            }
-            .countdown-timer {
-                font-size: 2.2rem;
-            }
-            .countdown-timer span {
-                min-width: 40px;
-            }
-            #foxGif {
-                width: 160px;
-                height: 120px;
-            }
+        .achievement .icon {
+            font-size: 1.6rem;
+            width: 40px;
+            text-align: center;
+            filter: drop-shadow(0 0 4px #9f3a3a55);
+            flex-shrink: 0;
         }
 
-        @media (max-width: 420px) {
-            .shadowfox-card {
-                padding: 20px 15px 30px 15px;
-                border-radius: 28px;
-                border-width: 2px;
-            }
-            .time-display {
-                font-size: 2.8rem;
-                letter-spacing: 2px;
-            }
-            .countdown-timer {
-                font-size: 1.7rem;
-            }
-            .countdown-timer span {
-                min-width: 30px;
-            }
-            #foxGif {
-                width: 130px;
-                height: 98px;
-            }
-            .date-display {
-                font-size: 0.85rem;
-            }
-            .age-number {
-                font-size: 2.5rem;
-            }
-            .age-label {
-                font-size: 1.2rem;
-            }
+        .achievement .content {
+            flex: 1;
+            min-width: 0;
+        }
+        .achievement .title {
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: -0.2px;
+            color: #f0e0e0;
+            margin-bottom: 1px;
+        }
+        .achievement .desc {
+            font-size: 0.65rem;
+            font-weight: 300;
+            color: #a88686;
+            letter-spacing: 0.3px;
+        }
+
+        .achievement:active {
+            transform: scale(0.98);
+            background: #2b1515;
+        }
+
+        .footer-note {
+            margin-top: 10px;
+            font-size: 0.5rem;
+            text-align: right;
+            letter-spacing: 1px;
+            color: #4f2e2e;
+        }
+        .footer-note span {
+            color: #6d3f3f;
+        }
+
+        @media (max-width: 400px) {
+            .app { padding: 16px 10px 20px; }
+            .achievement { padding: 8px 10px; gap: 10px; }
+            .header h1 { font-size: 1.3rem; }
+            .achievement .icon { font-size: 1.4rem; width: 34px; }
+            .achievement .number { font-size: 0.5rem; min-width: 18px; }
+        }
+
+        ::selection {
+            background: #6f2c2c;
+            color: #f2e1e1;
         }
     </style>
 </head>
 <body>
 
-<div class="shadowfox-card">
-    
-    <!-- ЧАСЫ -->
-    <div class="time-display" id="clock">--:--:--</div>
-    <div class="date-display" id="date">---- · -- · ---</div>
-
-    <!-- ВОЗРАСТ -->
-    <div class="age-block">
-        <span class="age-number" id="ageYears">--</span>
-        <span class="age-label" id="ageLabel">лет</span>
+<div class="app">
+    <div class="header">
+        <h1>✦ <span id="sfLabel">sf</span> · коллекция</h1>
+        <div class="badge">🦊 23</div>
     </div>
 
-    <!-- ТАЙМЕР ДО ДНЯ РОЖДЕНИЯ -->
-    <div class="countdown-wrapper">
-        <div class="countdown-label">⏳ До дня рождения</div>
-        <div class="countdown-timer" id="countdown">
-            <span id="cdDays">00</span>д 
-            <span id="cdHours">00</span>ч 
-            <span id="cdMinutes">00</span>м 
-            <span id="cdSeconds">00</span>с
-        </div>
+    <div class="stats">
+        <span>📜 путь лисы</span>
+        <span>✦ <span id="countDisplay">0</span>/23</span>
     </div>
 
-    <!-- GIF-ЛИСИЧКА (уменьшена) -->
-    <div class="fox-gif-wrapper">
-        <img id="foxGif" src="fox.gif" alt="ShadowFox" width="200" height="150">
-    </div>
+    <div class="grid" id="achievementList"></div>
+
+    <div class="footer-note"><span id="sfFooter">SF</span> · shadowfox · <span id="yearFooter">2026</span></div>
 </div>
 
 <script>
     (function() {
-        "use strict";
+      
 
-        // ================================================================
-        // 1. ВАША ДАТА РОЖДЕНИЯ (ИЗМЕНИТЕ ПРИ НЕОБХОДИМОСТИ)
-        // ================================================================
-        const birthday = new Date(2003, 5, 20); // 20 июня 2003
+       const ACHIEVEMENTS = [
+    // 1
+    { icon: '📖', title: 'первая страница', desc: 'мир открылся через книги' },
+    // 2
+    { icon: '🎨', title: 'цвет на холсте', desc: 'первые штрихи своего мира' },
+    // 3
+    { icon: '🐾', title: 'след зверя', desc: 'услышала зов природы' },
+    // 4
+    { icon: '🌲', title: 'лесной шёпот', desc: 'полюбила тишину деревьев' },
+    // 5
+    { icon: '🌿', title: 'мох под ногами', desc: 'нашла мягкость в этом мире' },
+    // 6
+    { icon: '🐕', title: 'верный друг', desc: 'поняла язык собак' },
+    // 7
+    { icon: '❤️', title: 'горячее сердце', desc: 'сохранила доброту сквозь тьму' },
+    // 8
+    { icon: '🔥', title: 'огненная грива', desc: 'красные волосы — знак силы' },
+    // 9
+    { icon: '🛡️', title: 'щит и характер', desc: 'научилась стоять за себя' },
+    // 10
+    { icon: '🚙', title: 'делика', desc: 'мечта о свободе на колёсах' },
+    // 11
+    { icon: '⚡', title: 'внедорожник души', desc: 'готова к любым дорогам' },
+    // 12
+    { icon: '🌑', title: 'ночь в лесу', desc: 'приняла свою тень' },
+    // 13
+    { icon: '🕯️', title: 'свеча надежды', desc: 'зажгла свет даже во тьме' },
+    // 14
+    { icon: '🌀', title: 'выход из шторма', desc: 'выбралась из отношений-ловушки' },
+    // 15
+    { icon: '🦊', title: 'лисий взгляд', desc: 'острая интуиция и ум' },
+    // 16
+    { icon: '🏡', title: 'дом в лесу', desc: 'начала строить мечту' },
+    // 17
+    { icon: '🍂', title: 'осенняя мудрость', desc: 'старая литература — её учитель' },
+    // 18
+    { icon: '🌟', title: 'звезда в ладонях', desc: 'поверила в своё будущее' },
+    // 19
+    { icon: '🐺', title: 'волчья стая', desc: 'кинолог — её призвание' },
+    // 20
+    { icon: '💫', title: 'новая глава', desc: 'начала жизнь с чистого листа' },
+    // 21
+    { icon: '🗝️', title: 'ключ к свободе', desc: 'вырвалась из клетки прошлого' },
+    // 22
+    { icon: '🌅', title: 'рассвет в лесу', desc: 'новый день — новая надежда' },
+    // 23
+    { icon: '👑', title: 'королева своего пути', desc: 'полная власть над своей жизнью' }
+];
 
-        // ================================================================
-        // 2. ЭЛЕМЕНТЫ DOM
-        // ================================================================
-        const clockEl = document.getElementById('clock');
-        const dateEl = document.getElementById('date');
-        const ageYearsEl = document.getElementById('ageYears');
-        const ageLabelEl = document.getElementById('ageLabel');
+        // ═══════════════════════════════════════════════════════
+        //  НИЖЕ НИЧЕГО НЕ МЕНЯЙ — ВСЁ РАБОТАЕТ АВТОМАТИЧЕСКИ
+        // ═══════════════════════════════════════════════════════
 
-        const cdDays = document.getElementById('cdDays');
-        const cdHours = document.getElementById('cdHours');
-        const cdMinutes = document.getElementById('cdMinutes');
-        const cdSeconds = document.getElementById('cdSeconds');
+        // ---- Автоматическая подстановка года ----
+        const currentYear = new Date().getFullYear();
+        const yearShort = String(currentYear).slice(2); // '26' из '2026'
+        
+        // Обновляем SF в заголовке
+        document.getElementById('sfLabel').textContent = 'sf' + yearShort;
+        
+        // Обновляем год в подвале
+        document.getElementById('yearFooter').textContent = currentYear;
 
-        // ================================================================
-        // 3. ФУНКЦИЯ ДЛЯ ПРАВИЛЬНОГО СКЛОНЕНИЯ СЛОВА "ЛЕТ"
-        // ================================================================
-        function getAgeLabel(age) {
-            // Правила склонения для русского языка
-            // 1 год, 2-4 года, 5-20 лет, 21 год, 22-24 года, 25-30 лет и т.д.
-            const lastDigit = age % 10;
-            const lastTwoDigits = age % 100;
+        // ---- Рендер ачивок ----
+        const listEl = document.getElementById('achievementList');
+        const countEl = document.getElementById('countDisplay');
 
-            // Исключения: 11-14 лет
-            if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
-                return 'лет';
-            }
+        function renderAchievements() {
+            listEl.innerHTML = '';
+            let count = 0;
 
-            switch (lastDigit) {
-                case 1:
-                    return 'год';
-                case 2:
-                case 3:
-                case 4:
-                    return 'года';
-                default:
-                    return 'лет';
+            ACHIEVEMENTS.forEach((ach, index) => {
+                if (ach && ach.title) {
+                    count++;
+                    const div = document.createElement('div');
+                    div.className = 'achievement';
+                    div.innerHTML = `
+                        <div class="number">${String(index + 1).padStart(2, '0')}</div>
+                        <div class="icon">${ach.icon || '✦'}</div>
+                        <div class="content">
+                            <div class="title">${ach.title}</div>
+                            <div class="desc">${ach.desc || ''}</div>
+                        </div>
+                    `;
+                    listEl.appendChild(div);
+                }
+            });
+
+            countEl.textContent = count;
+
+            // Если меньше 23, добавим пустые заглушки
+            if (count < 23) {
+                for (let i = count; i < 23; i++) {
+                    const div = document.createElement('div');
+                    div.className = 'achievement';
+                    div.style.opacity = '0.3';
+                    div.style.borderLeftColor = '#2a1414';
+                    div.innerHTML = `
+                        <div class="number">${String(i + 1).padStart(2, '0')}</div>
+                        <div class="icon">◈</div>
+                        <div class="content">
+                            <div class="title" style="color: #5a3a3a;">— пусто —</div>
+                            <div class="desc" style="color: #3a2a2a;">добавь ачивку</div>
+                        </div>
+                    `;
+                    listEl.appendChild(div);
+                }
             }
         }
 
-        // ================================================================
-        // 4. ОБНОВЛЕНИЕ ВРЕМЕНИ, ДАТЫ, ВОЗРАСТА И ТАЙМЕРА
-        // ================================================================
-        function updateTimeAndCountdown() {
-            const now = new Date();
+        renderAchievements();
 
-            // ——— Часы и дата ———
-            const hh = String(now.getHours()).padStart(2, '0');
-            const mm = String(now.getMinutes()).padStart(2, '0');
-            const ss = String(now.getSeconds()).padStart(2, '0');
-            clockEl.textContent = `${hh}:${mm}:${ss}`;
-
-            const days = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
-            const months = ['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'];
-            const dayName = days[now.getDay()];
-            const dayNum = String(now.getDate()).padStart(2, '0');
-            const monthName = months[now.getMonth()];
-            const year = now.getFullYear();
-            dateEl.textContent = `${dayName} · ${dayNum} ${monthName} · ${year}`;
-
-            // ——— Возраст (полных лет) с правильным склонением ———
-            let age = now.getFullYear() - birthday.getFullYear();
-            const mDiff = now.getMonth() - birthday.getMonth();
-            if (mDiff < 0 || (mDiff === 0 && now.getDate() < birthday.getDate())) {
-                age--;
+        // Эффект нажатия
+        document.addEventListener('click', function(e) {
+            const ach = e.target.closest('.achievement');
+            if (ach) {
+                ach.style.transition = '0.1s';
+                ach.style.background = '#3d1b1b';
+                setTimeout(() => {
+                    ach.style.background = '';
+                }, 150);
             }
-            
-            if (age >= 0) {
-                ageYearsEl.textContent = age;
-                ageLabelEl.textContent = getAgeLabel(age);
-            } else {
-                ageYearsEl.textContent = '0';
-                ageLabelEl.textContent = 'лет';
-            }
+        });
 
-            // ——— Таймер до следующего дня рождения ———
-            let nextBirthday = new Date(now.getFullYear(), birthday.getMonth(), birthday.getDate());
-            if (now > nextBirthday) {
-                nextBirthday = new Date(now.getFullYear() + 1, birthday.getMonth(), birthday.getDate());
-            }
-
-            const diffMs = nextBirthday - now;
-            if (diffMs <= 0) {
-                cdDays.textContent = '00';
-                cdHours.textContent = '00';
-                cdMinutes.textContent = '00';
-                cdSeconds.textContent = '00';
-                return;
-            }
-
-            const diffSec = Math.floor(diffMs / 1000);
-            const d = Math.floor(diffSec / 86400);
-            const h = Math.floor((diffSec % 86400) / 3600);
-            const m = Math.floor((diffSec % 3600) / 60);
-            const s = diffSec % 60;
-
-            cdDays.textContent = String(d).padStart(2, '0');
-            cdHours.textContent = String(h).padStart(2, '0');
-            cdMinutes.textContent = String(m).padStart(2, '0');
-            cdSeconds.textContent = String(s).padStart(2, '0');
-        }
-
-        // ================================================================
-        // 5. ЗАПУСК
-        // ================================================================
-        updateTimeAndCountdown();
-        setInterval(() => {
-            updateTimeAndCountdown();
-        }, 1000);
+        console.log(`🦊 SF${yearShort} · коллекция · 23 ачивки`);
+        console.log('✧ Чтобы изменить ачивки, отредактируй массив ACHIEVEMENTS в коде');
     })();
 </script>
-
 </body>
 </html>
